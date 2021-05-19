@@ -122,6 +122,7 @@ mineflayer.testedVersions.forEach((supportedVersion, i) => {
     const externalTestsFolder = path.resolve(__dirname, './externalTests')
     fs.readdirSync(externalTestsFolder)
       .filter(file => fs.statSync(path.join(externalTestsFolder, file)).isFile())
+      .filter(file => file.includes('crafting'))
       .forEach((test) => {
         test = path.basename(test, '.js')
         const testFunctions = require(`./externalTests/${test}`)(supportedVersion)

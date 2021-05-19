@@ -1,7 +1,7 @@
-const { Vec3 } = require('vec3')
+const {Vec3} = require('vec3')
 
 module.exports = () => async (bot) => {
-  const { blocksByName, itemsByName, findItemOrBlockByName } = require('minecraft-data')(bot.version)
+  const {blocksByName, itemsByName, findItemOrBlockByName} = require('minecraft-data')(bot.version)
   const Item = require('prismarine-item')(bot.version)
 
   let populateBlockInventory
@@ -14,7 +14,7 @@ module.exports = () => async (bot) => {
     craftItem = 'birch_planks'
   }
 
-  function findCraftingTable () {
+  function findCraftingTable() {
     const cursor = new Vec3(0, 0, 0)
     for (cursor.x = bot.entity.position.x - 4; cursor.x < bot.entity.position.x + 4; cursor.x++) {
       for (cursor.y = bot.entity.position.y - 4; cursor.y < bot.entity.position.y + 4; cursor.y++) {
@@ -26,7 +26,7 @@ module.exports = () => async (bot) => {
     }
   }
 
-  async function craft (amount, name) {
+  async function craft(amount, name) {
     const item = findItemOrBlockByName(name)
     const craftingTable = findCraftingTable()
     const wbText = craftingTable ? 'with a crafting table, ' : 'without a crafting table, '
@@ -46,7 +46,11 @@ module.exports = () => async (bot) => {
     }
   }
 
-  await bot.test.setInventorySlot(36, new Item(populateBlockInventory.id, 1, 0))
+  // Give it two logs
+  await bot.test.setInventorySlot(36, new Item(populateBlockInventory.id, 2, 0))
   await bot.test.becomeSurvival()
+  // Expect that this call works just fine
+  await craft(1, craftItem)
+  // Expect that this call fails
   await craft(1, craftItem)
 }
