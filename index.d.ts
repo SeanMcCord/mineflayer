@@ -8,15 +8,15 @@
 /// <reference types="prismarine-block" />
 /// <reference types="prismarine-entity" />
 
-import {EventEmitter} from "events";
+import { EventEmitter } from "events";
 import TypedEmitter from "typed-emitter";
-import {Client, ClientOptions} from "minecraft-protocol";
-import {Vec3} from "vec3";
-import {Item} from "prismarine-item";
-import {Window} from "prismarine-windows";
-import {Recipe} from "prismarine-recipe";
-import {Block} from "prismarine-block";
-import {Entity} from "prismarine-entity";
+import { Client, ClientOptions } from "minecraft-protocol";
+import { Vec3 } from "vec3";
+import { Item } from "prismarine-item";
+import { Window } from "prismarine-windows";
+import { Recipe } from "prismarine-recipe";
+import { Block } from "prismarine-block";
+import { Entity } from "prismarine-entity";
 
 export function createBot(options: BotOptions): Bot;
 
@@ -157,11 +157,11 @@ export interface Bot extends TypedEmitter<BotEvents> {
   majorVersion: string;
   version: string;
   entity: Entity;
-  entities: {[id: string]: Entity};
+  entities: { [id: string]: Entity };
   spawnPoint: Vec3;
   game: GameState;
   player: Player;
-  players: {[username: string]: Player};
+  players: { [username: string]: Player };
   isRaining: boolean;
   chatPatterns: Array<ChatPattern>;
   settings: GameSettings;
@@ -176,8 +176,8 @@ export interface Bot extends TypedEmitter<BotEvents> {
   inventory: Window;
   targetDigBlock: Block;
   isSleeping: boolean;
-  scoreboards: {[name: string]: ScoreBoard};
-  scoreboard: {[slot in DisplaySlot]: ScoreBoard};
+  scoreboards: { [name: string]: ScoreBoard };
+  scoreboard: { [slot in DisplaySlot]: ScoreBoard };
   controlState: ControlStateStatus;
   creative: creativeMethods;
   world: any;
@@ -368,10 +368,10 @@ export interface Bot extends TypedEmitter<BotEvents> {
     end: number,
     window: Window,
     slot: any,
-    waitForSlotUpdate?: boolean
+    cb?: (err?: Error) => void
   ): Promise<void>;
 
-  putAway(slot: number, waitForSlotUpdate?: boolean): Promise<void>;
+  putAway(slot: number, cb?: (err?: Error) => void): Promise<void>;
 
   closeWindow(window: Window): void;
 
@@ -460,15 +460,15 @@ export class ChatMessage {
 
   length(): number;
 
-  getText(idx: number, lang?: {[key: string]: string}): string;
+  getText(idx: number, lang?: { [key: string]: string }): string;
 
-  toString(lang?: {[key: string]: string}): string;
+  toString(lang?: { [key: string]: string }): string;
 
   valueOf(): string;
 
-  toMotd(lang?: {[key: string]: string}): string;
+  toMotd(lang?: { [key: string]: string }): string;
 
-  toAnsi(lang?: {[key: string]: string}): string;
+  toAnsi(lang?: { [key: string]: string }): string;
 }
 
 export interface ChatPattern {
@@ -763,7 +763,7 @@ export type VillagerTrade = {
 export class ScoreBoard {
   name: string;
   title: string;
-  itemsMap: {[name: string]: ScoreBoardItem};
+  itemsMap: { [name: string]: ScoreBoardItem };
   items: Array<ScoreBoardItem>;
 
   constructor(packet: object);
