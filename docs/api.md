@@ -263,7 +263,7 @@
       - [bot.waitForTicks(ticks)](#botwaitforticksticks)
     - [Lower level inventory methods](#lower-level-inventory-methods)
       - [bot.clickWindow(slot, mouseButton, mode, cb)](#botclickwindowslot-mousebutton-mode-cb)
-      - [bot.putSelectedItemRange(start, end, window, slot, cb)](#botputselecteditemrangestart-end-window-slot-cb)
+      - [bot.putSelectedItemRange(start, end, window, slot, waitForSlotUpdate)](#botputselecteditemrangestart-end-window-slot-waitForSlotUpdate)
       - [bot.putAway(slot, cb)](#botputawayslot-cb)
       - [bot.closeWindow(window)](#botclosewindowwindow)
       - [bot.transfer(options, cb)](#bottransferoptions-cb)
@@ -1789,19 +1789,19 @@ This function also returns a `Promise`, with `void` as its argument upon complet
 
 Click on the current window. See details at https://wiki.vg/Protocol#Click_Window
 
-#### bot.putSelectedItemRange(start, end, window, slot, noWaiting)
+#### bot.putSelectedItemRange(start, end, window, slot, waitForSlotUpdate)
 
 This function also returns a `Promise`, with `void` as its argument upon completion.
 
 Put the item at `slot` in the specified range.
 
-`noWaiting` will not wait for items to be moved.
+`waitForSlotUpdate` will wait for items to be moved.
 Can be useful in case the client is supposed to simulate without feedback from the server.
 
-#### bot.putAway(slot, noWaiting)
+#### bot.putAway(slot, waitForSlotUpdate)
 
 This function also returns a `Promise`, with `void` as its argument upon completion.
-`noWaiting` calls putSelectedItemRange with `noWaiting` option: it will not wait for items to be moved.
+`waitForSlotUpdate` calls putSelectedItemRange with `waitForSlotUpdate` option: it will wait for items to be moved.
 Can be useful in case the client is supposed to simulate without feedback from the server.
 
 Put the item at `slot` in the inventory.
